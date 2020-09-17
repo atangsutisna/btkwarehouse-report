@@ -1,0 +1,8 @@
+images/*
+vendor/*
+upload/*
+assets/js/config.js
+application/logs/*
+application/config/development/btkcommerce.php
+index.php
+.directory

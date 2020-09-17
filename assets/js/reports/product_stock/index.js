@@ -1,0 +1,1 @@
+$('#category-choices').select2()

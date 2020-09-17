@@ -1,0 +1,1 @@
+$('#supplier-choices').select2();

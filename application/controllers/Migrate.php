@@ -1,0 +1,23 @@
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Migrate extends CI_Controller
+{
+    public function index()
+    {
+        $this->load->library('migration');
+        if ($this->migration->current() === FALSE)
+        {
+            show_error($this->migration->error_string());
+        }
+
+        echo 'Migration success';
+    }  
+
+    public function create_get_next_id()
+    {
+        $this->load->helper('date');
+        echo "hello";
+    }
+}
