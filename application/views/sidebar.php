@@ -98,6 +98,11 @@ $indentity = get_identity();
                 <a href="<?= site_url('reports/stock/card') ?>">
                     <i class="fa fa-circle-o"></i><span>Laba-rugi Penjualan</span>
                 </a>
+            </li>  
+            <li>
+                <a href="<?= site_url('reports/label_harga') ?>">
+                    <i class="fa fa-circle-o"></i><span>Label Harga</span>
+                </a>
             </li>                                                                               
           </ul>
         </li>    
