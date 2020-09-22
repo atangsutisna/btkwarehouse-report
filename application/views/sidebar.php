@@ -118,6 +118,11 @@ $indentity = get_identity();
                 <a href="<?= site_url('reports/stock_with_gambar') ?>">
                     <i class="fa fa-circle-o"></i><span>Stock With Gambar (Freelancer)</span>
                 </a>
+            </li> 
+            <li>
+                <a href="<?= site_url('reports/retur_pembelian') ?>">
+                    <i class="fa fa-circle-o"></i><span>Retur Pembelian (Freelancer)</span>
+                </a>
             </li>                                                                               
           </ul>
         </li>    

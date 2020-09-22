@@ -24,12 +24,13 @@ class Stock_with_gambar_model extends MY_Model
                 FROM {PRE}product a
                 LEFT JOIN {PRE}product_description b ON (a.product_id = b.product_id) 
                 INNER JOIN {PRE}stock_adjustment c ON (a.product_id = c.product_id)
-                INNER JOIN {PRE}unit_measurement d ON (c.qty_unit_id = d.unit_measurement_id)
+                INNER JOIN {PRE}unit_measurement d ON (c.qty_unit_id = d.unit_measurement_id) 
+                INNER JOIN {PRE}product_to_category e ON (a.product_id = e.product_id) 
                 WHERE b.language_id = '{$language_id}'";
 
-        /*if ($param['supplier'] != NULL && $param['supplier'] !== '') {
-            $sql .= " AND ax.supplier_id='".$param['supplier']."'";
-        }*/
+        if ($param['category'] != NULL && $param['category'] !== '') {
+            $sql .= " AND e.category_id='".$param['category']."'";
+        }
 
         $sql .= " GROUP BY b.name,a.model,c.last_stock,d.name,a.image,a.minimum";
 

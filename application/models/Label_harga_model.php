@@ -14,7 +14,7 @@ class Label_harga_model extends MY_Model
     public function find_all($param = array(), $first = 0, $count = 25, $sort = 'sort_order', $order = 'asc')
     {
         # code...
-        $term="";
+        /*$term="";
         for ($i=0;$i<count($param);$i++) {
             # code...
             if ($i==0) {
@@ -23,16 +23,18 @@ class Label_harga_model extends MY_Model
             }else{
                 $term .= ",'".$param[$i]."'";
             }
-        }
+        }*/
         $language_id = (int) $this->get_language_id();
-        $sql = "SELECT SUBSTRING(b.name,1,40) as name,a.model,FORMAT(a.price_2,2) as price,
+        $sql = "SELECT case when char_length(b.name)<23 then concat(b.name,'<p style=''color:#fff;''>_</p>') else SUBSTRING(b.name,1,40) end as name,a.model,FORMAT(a.price_2,2) as price,
                 coalesce(DATE_FORMAT(a.expiry_date,'%d-%m-%Y'),'N/A') as expired 
                 FROM {PRE}product a 
                 LEFT JOIN {PRE}product_description b ON (a.product_id = b.product_id) 
+                INNER JOIN {PRE}product_to_category c ON (a.product_id = c.product_id) 
                 WHERE b.language_id = '{$language_id}'";
 
-        if ($term != NULL && $term !== '') {
-            $sql .= " AND a.product_id IN(" . $term . ")";
+        if ($param['category'] != NULL && $param['category'] !== '') {
+            $sql .= " AND c.category_id='".$param['category']."'";
+            //$sql .= " AND a.product_id IN(" . $term . ")";
         }
 
         $sql .= " GROUP BY a.product_id";

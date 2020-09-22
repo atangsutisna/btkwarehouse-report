@@ -16,19 +16,20 @@ class Nilai_stock_model extends MY_Model
         # code...
         $language_id = (int) $this->get_language_id();
         $sql = "SELECT SUBSTRING(b.name,1,40) as name,
-                CASE WHEN ".$param['type']."=2 THEN FORMAT(a.price,2) ELSE FORMAT(a.price_2,2) END as price,
+                CASE WHEN ".$param['type']."=2 THEN FORMAT(a.cost_of_goods_sold,2) ELSE FORMAT(a.price_2,2) END as price,
                 a.model as code,
                 c.last_stock as stock,
                 d.name as satuan,
-                CASE WHEN ".$param['type']."=2 THEN c.last_stock*a.price ELSE c.last_stock*a.price_2 END as total 
+                CASE WHEN ".$param['type']."=2 THEN c.last_stock*a.cost_of_goods_sold ELSE c.last_stock*a.price_2 END as total 
                 FROM {PRE}product a 
                 LEFT JOIN {PRE}product_description b ON (a.product_id = b.product_id) 
                 INNER JOIN {PRE}stock_adjustment c ON a.product_id = c.product_id 
                 INNER JOIN {PRE}unit_measurement d ON c.qty_unit_id = d.unit_measurement_id 
+                INNER JOIN {PRE}product_to_category e ON (a.product_id = e.product_id) 
                 WHERE b.language_id = '{$language_id}'";
 
         if ($param['category'] != NULL && $param['category'] !== '') {
-            $sql .= "";
+            $sql .= " AND e.category_id='".$param['category']."'";
         }
 
         $sql .= " GROUP BY a.product_id,c.last_stock,d.name";
