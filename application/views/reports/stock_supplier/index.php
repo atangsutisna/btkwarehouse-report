@@ -16,6 +16,32 @@
                         method="get" 
                         action="<?= site_url('reports/stock_supplier/print') ?>"
                         target="_blank">
+                        <div class="form-group <?= form_error('category_id') ? 'has-error' : '' ?>">
+                            <label class="col-lg-3 col-sm-3 control-label">Kategori</label>
+                            <div class="col-lg-9 col-sm-9">
+                                <div class="col-lg-6 col-sm-8">
+                                    <select name="cat_id" class="form-control" id="category-choices">
+                                        <option selected disabled="disabled">Pilih Kategori</option>
+                                        <?php foreach ($categories as $category) : ?>
+                                        <option value="<?= $category->category_id ?>"><?= $category->name ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group <?= form_error('supplier_id') ? 'has-error' : '' ?>">
+                            <label class="col-lg-3 col-sm-3 control-label">Supplier</label>
+                            <div class="col-lg-9 col-sm-9">
+                                <div class="col-lg-6 col-sm-8">
+                                    <select name="sup_id" class="form-control" id="supplier-choices">
+                                        <option selected disabled="disabled">Pilih Supplier</option>
+                                        <?php foreach ($supplier as $row) : ?>
+                                        <option value="<?= $row->supplier_id ?>"><?= $row->name ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-lg-3 col-sm-3" style="padding-left: 30px;">
                                 <button type="submit" class="btn btn-info" id="btn-search">

@@ -33,8 +33,18 @@
                     <b>Jln, Jendral Sudirman no. 38</b><br/>
                 </td>  
                 <td style="width: 40%; vertical-align: top; border: none;">
-                    <b style="margin-right: 10px;">Gudang : </b> BTK MART<br/>
-                    <b style="margin-right: 10px;">Kategori : </b>AJW<br/>
+                    <table width="100%" padding="0">
+                        <tr>
+                            <td style="border: none; width:25%;padding:0px;"><b>Gudang</b></td>
+                            <td style="border: none; width:10%;padding:0px;"><b>:</b></td>
+                            <td style="border: none;padding:0px;">BTK MART</td>
+                        </tr>
+                        <tr>
+                            <td style="border: none;padding:0px;"><b>Kategori</b></td>
+                            <td style="border: none;padding:0px;"><b>:</b></td>
+                            <td style="border: none;padding:0px;"><?= $cat_name ?></td>
+                        </tr>
+                    </table>
                 </td>  
             </tr>
         </table>
