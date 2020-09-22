@@ -8,14 +8,16 @@ class Label_harga extends Admin_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(['label_harga_model']);
+        $this->load->model(['label_harga_model','category_model']);
     }
 
     public function index()
     {
+        $categories = $this->category_model->find_all($term = NULL, $first = 0, $count = 5000);
         $params = [
+            'categories' => $categories,
             'js_resources' => [
-                '',
+                'assets/js/reports/product_stock/index.js',
             ]
         ];
         $this->load->template(self::DIR_VIEW. '/index', $params);
@@ -25,14 +27,7 @@ class Label_harga extends Admin_Controller
     {
     	# code...
     	$params = array(
-    				'15305',
-    				'15304',
-    				'15303',
-    				'15302',
-    				'15300',
-    				'15229',
-    				'15228',
-    				'15281'
+    				'category'=>$cat_id = $this->input->get('cat_id')
     			);
         $css = file_get_contents(base_url("assets/vendor/bootstrap/bootstrap.min.css"));
         

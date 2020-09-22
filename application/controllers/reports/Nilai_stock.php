@@ -56,8 +56,8 @@ class Nilai_stock extends Admin_Controller
             'margin-top' => 7,
             'margin-bottom' => 7,
         ]);
-        $mpdf->writeHTML($view);
         $mpdf->setFooter('Halaman {PAGENO} dari {nbpg}');
+        $mpdf->writeHTML($view);
         $mpdf->output();
     }
 

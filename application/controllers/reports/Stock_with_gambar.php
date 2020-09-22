@@ -8,14 +8,14 @@ class Stock_with_gambar extends Admin_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(['Stock_with_gambar_model']);
+        $this->load->model(['Stock_with_gambar_model','category_model']);
     }
 
     public function index()
     {
-        //$categories = $this->category_model->find_all($term = NULL, $first = 0, $count = 5000);
+        $categories = $this->category_model->find_all($term = NULL, $first = 0, $count = 5000);
         $params = [
-            //'categories' => $categories,
+            'categories' => $categories,
             'js_resources' => [
                 'assets/js/reports/product_stock/index.js',
             ]
@@ -26,13 +26,16 @@ class Stock_with_gambar extends Admin_Controller
      public function print()
     {
         $title = "Laporan Stock ";
+        $cat_id = $this->input->get('cat_id');
+        $cat_name = $this->_get_category_name($cat_id);
         $params = array(
-            'categories' => '29' 
+            'category' => $cat_id
         );
         $stock = $this->Stock_with_gambar_model->find_all($params);
         $view = $this->load->view('reports/stock_with_gambar/print', [
             'title' => $title,
-            'stock' => $stock 
+            'stock' => $stock,
+            'cat_name' => $cat_name
         ], TRUE);
 
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A5']);
@@ -42,8 +45,18 @@ class Stock_with_gambar extends Admin_Controller
             'margin-top' => 7,
             'margin-bottom' => 7,
         ]);
-        $mpdf->writeHTML($view);
         $mpdf->setFooter('Halaman {PAGENO} dari {nbpg}');
+        $mpdf->writeHTML($view);
         $mpdf->output();
+    }
+
+    protected function _get_category_name($cat_id)
+    {
+        $category = $this->category_model->find_one($cat_id);
+        if ($category == NULL) {
+            return NULL;
+        }
+
+        return $category->name;
     }
 }
