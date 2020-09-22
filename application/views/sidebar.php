@@ -101,7 +101,22 @@ $indentity = get_identity();
             </li>  
             <li>
                 <a href="<?= site_url('reports/label_harga') ?>">
-                    <i class="fa fa-circle-o"></i><span>Label Harga</span>
+                    <i class="fa fa-circle-o"></i><span>Label Harga (Freelancer)</span>
+                </a>
+            </li>   
+            <li>
+                <a href="<?= site_url('reports/nilai_stock') ?>">
+                    <i class="fa fa-circle-o"></i><span>Nilai Stock (Freelancer)</span>
+                </a>
+            </li>   
+            <li>
+                <a href="<?= site_url('reports/stock_supplier') ?>">
+                    <i class="fa fa-circle-o"></i><span>Stock Produk Supplier (Freelancer)</span>
+                </a>
+            </li>    
+            <li>
+                <a href="<?= site_url('reports/stock_with_gambar') ?>">
+                    <i class="fa fa-circle-o"></i><span>Stock With Gambar (Freelancer)</span>
                 </a>
             </li>                                                                               
           </ul>
